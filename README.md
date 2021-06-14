@@ -1,2 +1,2 @@
 # concepto_cli
-Concepto DSL CLI companion
+Commandline companion for Concepto DSL 
