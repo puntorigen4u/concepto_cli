@@ -1,0 +1,55 @@
+{
+  "name": "@concepto/cli",
+  "version": "0.0.23",
+  "description": "Concepto DSL - visually create and maintain modern node.js based apps (@cli)",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "bin": {
+    "concepto": "bin/cli"
+  },
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development rollup -c",
+    "build": "cross-env NODE_ENV=production rollup -c && npm run docs",
+    "docs": "jsdoc2md -t README.hbs src/*.js > README.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puntorigen4u/concepto_cli.git"
+  },
+  "keywords": [],
+  "author": "Pablo Schaffner",
+  "license": "MIT",
+  "bugs": {
+    "mail": "pablo@puntorigen.com",
+    "url": "https://github.com/puntorigen4u/concepto_cli/issues"
+  },
+  "homepage": "https://github.com/puntorigen4u/concepto_cli#readme",
+  "dependencies": {
+    "concepto": "github:puntorigen4u/concepto",
+    "download-file-with-progressbar": "^1.2.3",
+    "dsl_parser": "github:puntorigen4u/dsl_parser",
+    "minimist": "^1.2.5",
+    "open_console": "github:puntorigen4u/console"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@rollup/plugin-babel": "^5.1.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "cross-env": "^7.0.2",
+    "jsdoc-to-markdown": "^7.0.0",
+    "rollup": "^2.23.1",
+    "rollup-plugin-typescript2": "^0.31.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.2"
+  },
+  "scarfSettings": {
+    "enabled": false
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

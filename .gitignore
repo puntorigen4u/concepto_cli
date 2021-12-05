@@ -1,0 +1,30 @@
+# IDE & OS specific
+.DS_Store
+.idea
+icon.png
+
+# Github keys
+gh-pages
+gh-pages.sub
+
+# Logs
+logs
+*.log
+
+# Dependencies
+node_modules
+
+# Coverage
+coverage
+
+# Types
+flow-typed/npm/*
+!flow-typed/npm/module_vx.x.x.js
+
+# Release
+#lib
+
+# dsl file tests
+test/vue.dsl
+
+

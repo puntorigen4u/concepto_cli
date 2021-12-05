@@ -1,0 +1,74 @@
+#!/usr/bin/env node
+process.env.UV_THREADPOOL_SIZE=8*require('os').cpus().length;
+//const cli = require('command-line-args');
+const open_console = require('open_console');
+const pkg = require('../package.json');
+const helper = require('../lib/index');
+const cmds = require('minimist')(process.argv.slice(2));
+//console.log('argumentos',cmds);
+/*if (myArgs.cpu) {
+    process.env.UV_THREADPOOL_SIZE=8*parseFloat(myArgs.cpu);
+    delete myArgs.cpu;
+}
+
+let getSerial = function() {
+    return new Promise(function(resolve,reject) {
+        let _serial = require('serial-number');
+        _serial(function(err,value) {
+            if (err) reject(err);
+            resolve(value);
+        });
+    });
+};
+*/
+/* */
+(async () => {
+    // testing code here
+    //let file = (myArgs.length>0)?myArgs[0]:'vue.dsl';
+    //let debug = (myArgs.length>1)?eval(myArgs[1].trim()):false;
+    let x_console = new open_console();
+    let x_helper = new helper();
+    
+    //let serial = await getSerial();
+    let printUsage = function(command='') {
+        if (command!='' && x_helper[command+'_usage']) {
+            x_console.out({ message:'Usage:', color:'brightCyan' });
+            x_console.out({ message:`concepto ${command} [options]`, color:'green' });
+            console.log('');
+            x_console.out({ message:`Options for '${command}':`, color:'brightCyan' });
+            const usage = x_helper[command+'_usage']();
+            for (const cmd of usage) {
+                const desc = cmd.pop();
+                x_console.out({ message:cmd.join(', ')+'\t\t\t'+desc, color:'cyan' });    
+            }
+        } else {
+            x_console.out({ message:'Usage:', color:'brightCyan' });
+            x_console.out({ message:'concepto <command> [options]', color:'yellow' });
+            console.log('');
+            x_console.out({ message:'Options:', color:'brightCyan' });
+            x_console.out({ message:'-v, --version\t\t\tOutputs the current version', color:'cyan' });
+            x_console.out({ message:'-h, --help vue.dsl\t\tOutputs usage information', color:'cyan' });
+        }
+        console.log('');
+        x_console.out({ message:'Commands:', color:'brightYellow' });
+        x_console.out({ message:'install [--global]\t\tDownloads and installs Concepto DSL IDE', color:'brightCyan' });
+        x_console.out({ message:'create [options] [name]\t\tGenerates a Concepto DSL application', color:'brightCyan' });        
+        console.log('');
+        //copyright
+        x_console.out({ message:`Copyright © 2021, Pablo Schaffner. All rights reserved.`, color:'dim' });
+    };
+    x_console.title({ title:`Concepto CLI v${pkg.version}`, titleColor:'brightYellow', color:'green' });
+    if (cmds._.includes('help') || cmds.h || cmds.help || cmds._.length==0) {
+        if (cmds._[0]=='help' || cmds._.length==0) {
+            printUsage();
+        } else {
+            printUsage(cmds._[0]);
+        }
+    } else {
+        x_helper[cmds._[0]](cmds);
+    }
+
+})().catch(err => {
+    console.error(err);
+});
+/* */
