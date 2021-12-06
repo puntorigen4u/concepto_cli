@@ -6,6 +6,7 @@
 const open_console = require('open_console');
 const x_console = new open_console();
 
+//decorators
 const command = (usage:any) =>
     (target: Object, key: string, descriptor: PropertyDescriptor) =>  {
     const original = descriptor.value;
@@ -43,12 +44,19 @@ const command = (usage:any) =>
         }
     }
 };
+const cli = (constructor: Function) => {
+    for (const method in constructor.prototype) {
+        constructor.prototype[method]({ _init:true });
+    }
+};
+//
 
+
+@cli
 export default class concepto_cli {
     usage:any
 
 	constructor(arg:{silent?:boolean}={silent:true}) {
-        this.create({ _init:true });
     }
 
     @command([
