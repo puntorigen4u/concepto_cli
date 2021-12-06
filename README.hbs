@@ -22,7 +22,7 @@ $ npm install -g @concepto/cli
 
 ## Usage
 
-... work in progres ...
+... work in progress ...
 
 ## Stay in touch
 
@@ -34,7 +34,3 @@ $ npm install -g @concepto/cli
 Concepto is [MIT licensed](LICENSE).
 
 Concepto DSL - visually create and maintain modern node.js based apps (@cli).
-
-
-* * *
-&copy; 2020-2021 Pablo Schaffner &lt;pablo@puntorigen.com&gt;.
