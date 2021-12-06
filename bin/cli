@@ -31,12 +31,13 @@ let getSerial = function() {
     
     //let serial = await getSerial();
     let printUsage = function(command='') {
-        if (command!='' && x_helper[command+'_usage']) {
+        if (command!='' && x_helper.usage && x_helper.usage[command]) {
             x_console.out({ message:'Usage:', color:'brightCyan' });
             x_console.out({ message:`concepto ${command} [options]`, color:'green' });
             console.log('');
             x_console.out({ message:`Options for '${command}':`, color:'brightCyan' });
-            const usage = x_helper[command+'_usage']();
+            //const usage = x_helper[command+'_usage']();
+            const usage = x_helper.usage[command];
             for (const cmd of usage) {
                 const desc = cmd.pop();
                 x_console.out({ message:cmd.join(', ')+'\t\t\t'+desc, color:'cyan' });    

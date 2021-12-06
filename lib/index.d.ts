@@ -4,6 +4,5 @@ export default class concepto_cli {
         silent?: boolean;
     });
     create(arg: any): void;
-    create_usage(): string[][];
 }
 //# sourceMappingURL=index.d.ts.map
