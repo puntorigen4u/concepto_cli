@@ -34,13 +34,15 @@ let getSerial = function() {
         if (command!='' && x_helper.usage && x_helper.usage[command]) {
             x_console.out({ message:'Usage:', color:'brightCyan' });
             x_console.out({ message:`concepto ${command} [options]`, color:'green' });
-            console.log('');
-            x_console.out({ message:`Options for '${command}':`, color:'brightCyan' });
-            //const usage = x_helper[command+'_usage']();
             const usage = x_helper.usage[command];
-            for (const cmd of usage) {
-                const desc = cmd.pop();
-                x_console.out({ message:cmd.join(', ')+'\t\t\t'+desc, color:'cyan' });    
+            if (usage.length>0) {
+                console.log('');
+                x_console.out({ message:`Options for '${command}':`, color:'brightCyan' });
+                //const usage = x_helper[command+'_usage']();
+                for (const cmd of usage) {
+                    const desc = cmd.pop();
+                    x_console.out({ message:cmd.join(', ')+'\t\t\t'+desc, color:'cyan' });    
+                }
             }
         } else {
             x_console.out({ message:'Usage:', color:'brightCyan' });
@@ -51,10 +53,18 @@ let getSerial = function() {
             x_console.out({ message:'-h, --help vue.dsl\t\tOutputs usage information', color:'cyan' });
         }
         console.log('');
-        x_console.out({ message:'Commands:', color:'brightYellow' });
-        x_console.out({ message:'install [--global]\t\tDownloads and installs Concepto DSL IDE', color:'brightCyan' });
-        x_console.out({ message:'create [options] [name]\t\tGenerates a Concepto DSL application', color:'brightCyan' });        
-        console.log('');
+        if (x_helper.commands) {
+            x_console.out({ message:'Commands:', color:'brightYellow' });
+            for (let cmd_ in x_helper.commands) {
+                const usage = x_helper.usage[cmd_];
+                if (usage.length>0) {
+                    x_console.out({ message:`${cmd_} [options]\t\t${x_helper.commands[cmd_]}`, color:'brightCyan' });
+                } else {
+                    x_console.out({ message:`${cmd_} \t\t\t${x_helper.commands[cmd_]}`, color:'brightCyan' });
+                }
+            }
+            console.log('');
+        }
         //copyright
         x_console.out({ message:`Copyright © 2021, Pablo Schaffner. All rights reserved.`, color:'dim' });
     };

@@ -7,13 +7,15 @@ const open_console = require('open_console');
 const x_console = new open_console();
 
 //decorators
-const command = (usage:any) =>
+const command = (desc:String, usage:any) =>
     (target: Object, key: string, descriptor: PropertyDescriptor) =>  {
     const original = descriptor.value;
     descriptor.value = function(...args) {
         //let usage = target[key+'_usage']();
         if (!this.usage) this.usage = {};
-        this.usage[key] = usage; //declare it for CLI knowledg
+        if (!this.commands) this.commands = {};
+        this.usage[key] = usage; //declare it for CLI knowledge
+        this.commands[key] = desc; //declare it for CLI knowledge
         //modify/normalize args before calling original method
         let norm = args[0];
         if (!norm._init) {        
@@ -55,19 +57,25 @@ const cli = (constructor: Function) => {
 @cli
 export default class concepto_cli {
     usage:any
+    commands:any
 
 	constructor(arg:{silent?:boolean}={silent:true}) {
     }
 
-    @command([
+    @command('Generates a Concepto DSL application',[
         ['-t','--type', 'Specifies the application type (vue,eb,nest)'],
         ['-n','--name', 'Specifies the application name'],
         ['--aws-access','Specifies AWS access key'],
         ['--aws-secret','Specifies AWS secret key'],
         ['--secrets-pass','Set the default .secrets-pass password'],
     ])
-    create(arg:any) {
+    create(arg:Object) {
         console.log('received args',arg);
+    }
+
+    @command('Downloads and installs Concepto DSL IDE',[])
+    install(arg:Object) {
+
     }
 
 }
