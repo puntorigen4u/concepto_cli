@@ -17,7 +17,8 @@ const config = {
     typescript({
         declaration: true,
         declarationDir: "lib/",
-        declarationMap: true
+        declarationMap: true,
+        experimentalDecorators: true
     }),
     babel({
       presets: [

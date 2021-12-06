@@ -1,4 +1,5 @@
 export default class concepto_cli {
+    usage: any;
     constructor(arg?: {
         silent?: boolean;
     });

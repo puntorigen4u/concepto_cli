@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
+      "experimentalDecorators": true,
       "declaration": true,
       "declarationDir": "./lib",
-      "declarationMap": true
+      "declarationMap": true,
+      "target": "ES5"
     }
   }

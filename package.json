@@ -1,6 +1,6 @@
 {
   "name": "@concepto/cli",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Concepto DSL - visually create and maintain modern node.js based apps (@cli)",
   "publishConfig": {
     "access": "public"
@@ -39,6 +39,7 @@
     "@babel/preset-env": "^7.11.0",
     "@rollup/plugin-babel": "^5.1.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
+    "@types/node": "^16.11.11",
     "cross-env": "^7.0.2",
     "jsdoc-to-markdown": "^7.0.0",
     "rollup": "^2.23.1",
