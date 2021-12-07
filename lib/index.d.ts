@@ -4,7 +4,7 @@ export default class concepto_cli {
     constructor(arg?: {
         silent?: boolean;
     });
-    create(arg: Object): void;
-    install(arg: Object): void;
+    create(arg: any): Promise<void>;
+    install(arg: any): Promise<void>;
 }
 //# sourceMappingURL=index.d.ts.map

@@ -1,6 +1,6 @@
 {
   "name": "@concepto/cli",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Concepto DSL - visually create and maintain modern node.js based apps (@cli)",
   "publishConfig": {
     "access": "public"
@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development rollup -c",
     "build": "cross-env NODE_ENV=production rollup -c && npm run docs",
-    "docs": "jsdoc2md -t README.hbs src/*.js > README.md"
+    "docs": "jsdoc2md -t README.hbs lib/*.js > README.md"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,8 @@
     "download-file-with-progressbar": "^1.2.3",
     "dsl_parser": "github:puntorigen4u/dsl_parser",
     "minimist": "^1.2.5",
-    "open_console": "github:puntorigen4u/console"
+    "open_console": "github:puntorigen4u/console",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
