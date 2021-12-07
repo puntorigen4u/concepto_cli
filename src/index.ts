@@ -26,12 +26,30 @@ export default class concepto_cli {
         ['--secrets-pass','Set the default .secrets-pass password'],
     ])
     async create(arg:any) {
-        if (typeof arg.name === undefined) arg.name = (await prompts({
+        console.log('');
+        if (arg._.length>0) arg.name = arg._[0];
+        if (!arg.name) arg.name = (await prompts({
             type: 'text',
             name: 'value',
             message: `What's the applicacion name`,
-            validate: value => value.length<5 ? `Name to short!`:true
+            validate: value => {
+                if (value.length<5) return `Name to short!`;
+                if (value.trim().indexOf(' ')!=-1) return `Name cannot contain spaces!`;
+                return true; 
+            }
         })).value;
+        if (!arg.type) arg.type = (await prompts({
+            type: 'select',
+            name: 'value',
+            message: `Choose an application type`,
+            choices: [
+                { title: 'Frontend - NuxtJS + VueJS', value:'vue', description: `Static VueJS page builder; can publish to S3` },
+                { title: 'Backend  - ExpressJS + Sequelize', value:'eb', description: `NodeJS backend with sequelize for DB handling` },
+                { title: 'Backend  - NestJS + Typescript', disabled:true, value:'nest', description: `Experimental NestJS backend with typescript support` }
+            ],
+            initial: 1
+        })).value;
+        console.log('');
         console.log('received args',arg);
     }
 
