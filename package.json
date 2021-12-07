@@ -1,6 +1,6 @@
 {
   "name": "@concepto/cli",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Concepto DSL - visually create and maintain modern node.js based apps (@cli)",
   "publishConfig": {
     "access": "public"

@@ -43,7 +43,8 @@ export default class concepto_cli {
             name: 'value',
             message: `Choose an application type`,
             choices: [
-                { title: 'Frontend - NuxtJS + VueJS', value:'vue', description: `Static VueJS page builder; can publish to S3` },
+                { title: 'Frontend - NuxtJS + VUE', value:'vue', description: `VueJS web app builder; can publish to S3 if set to static` },
+                { title: 'Frontend - NestJS + React', disabled:true, value:'react', description: `ReactJS web app builder; can publish to S3 if set to static` },
                 { title: 'Backend  - ExpressJS + Sequelize', value:'eb', description: `NodeJS backend with sequelize for DB handling` },
                 { title: 'Backend  - NestJS + Typescript', disabled:true, value:'nest', description: `Experimental NestJS backend with typescript support` }
             ],
