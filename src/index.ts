@@ -23,21 +23,22 @@ export default class concepto_cli {
     @command('Creates a new Concepto DSL application',[
         ['-t','--type', 'Specifies the application type (vue,eb,nest)'],
         ['-n','--name', 'Specifies the application name'],
-        ['-h','--hosting', 'Specifies hosting type (local,aws,gh-pages)'],
+        ['-d','--deploy', 'Specifies deploy type (local,aws,gh-pages)'],
         ['--aws-access','Specifies AWS access key'],
         ['--aws-secret','Specifies AWS secret key'],
         ['--secrets-pass','Set the default .secrets-pass password'],
     ])
     async create(arg:any) {
+        if (arg._.length>0) arg.name = arg._[0];
+        if (arg.name) console.log('create->'+arg.name);
         console.log('');
         //required arguments
-        if (arg._.length>0) arg.name = arg._[0];
         if (!arg.name) arg.name = (await prompts({
             type: 'text',
             name: 'value',
             message: `What's the application's name`,
             validate: value => {
-                if (value.length<5) return `Name to short!`;
+                if (value.length<3) return `Name to short!`;
                 if (value.trim().indexOf(' ')!=-1) return `Name cannot contain spaces!`;
                 return true; 
             }
@@ -47,26 +48,56 @@ export default class concepto_cli {
             name: 'value',
             message: `Choose an application type`,
             choices: [
-                { title: 'Frontend - NuxtJS + VUE', value:'vue', description: `VueJS web app builder; can publish to S3 if set to static` },
+                { title: 'Frontend ->  NuxtJS + VUE', value:'vue', description: `VueJS web app builder; can publish to S3 if set to static` },
                 //{ title: 'Frontend - NestJS + React', disabled:true, value:'react', description: `ReactJS web app builder; can publish to S3 if set to static` },
-                { title: 'Backend  - ExpressJS + Sequelize', value:'eb', description: `NodeJS backend with sequelize for DB handling` },
-                { title: 'Backend  - NestJS + Typescript', disabled:true, value:'nest', description: `Experimental NestJS backend with typescript support` }
+                { title: 'Backend  ->  ExpressJS + Sequelize', value:'eb', description: `NodeJS backend with sequelize for DB handling` },
+                { title: 'Backend  ->  NestJS + Typescript', disabled:true, value:'nest', description: `Experimental NestJS backend with typescript support` }
             ],
             initial: 0
         })).value;
+        let deploy_opts = [
+            { title: 'Just locally', value:'local' },
+            { title: 'Amazon Web Services', value:'aws' },
+            { title: 'Github Pages', value:'gh-pages' },
+        ];
+        if (arg.type!='vue' && arg.type!='react') deploy_opts.splice(2,1);
+        if (!arg.deploy) arg.deploy = (await prompts({
+            type: 'select',
+            name: 'value',
+            message: `Where will you deploy this app?`,
+            choices: deploy_opts,
+            initial: 0
+        })).value;
+        if (arg.deploy=='aws' && (arg.type=='vue' || arg.type=='react')) {
+            arg.deploy = (await prompts({
+                type: 'select',
+                name: 'value',
+                message: `In what AWS service do you plan to host it?`,
+                choices: [
+                    { title: 'Elasticbean', value:'eb' },
+                    { title: 'S3', value:'s3' }
+                ],
+                initial: 1
+            })).value;
+            arg.static = false;
+            if (arg.deploy=='s3') arg.static = true;
+        } else if (arg.deploy=='gh-pages') {
+            arg.static = true;
+        }
         //additional arguments based on prev arguments
+        if (arg.deploy=='local' && !arg.static && (arg.type=='vue' || arg.type=='react')) arg.static = (await prompts({
+            type: 'toggle',
+            name: 'value',
+            message: `Do you wish to generate static files for deployment?`,
+            initial: true,
+            active: 'yes',
+            inactive: 'no'
+        })).value;
+        //VUE options
         if (arg.type=='vue') {
             //VUE arguments
-            console.log('');
-            x_console.out({ message:'VUE DSL', color:'yellow' });
-            arg.static = (await prompts({
-                type: 'toggle',
-                name: 'value',
-                message: `Do you wish to generate static files for deployment?`,
-                initial: true,
-                active: 'yes',
-                inactive: 'no'
-            })).value;
+            //console.log('');
+            //x_console.out({ message:'VUE DSL', color:'yellow' });
         }
         console.log('');
         console.log('received args',arg);
