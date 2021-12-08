@@ -3,54 +3,13 @@
 * @name 	concepto_cli
 * @module 	concepto_cli
 **/
-import { rejects } from 'assert';
-import { resolve } from 'path/posix';
 import { cli,command } from './decorators'
-//const download = require('download-file-with-progressbar');
+import { mount, unmount } from './dmg'
+import { download } from './download'
+
 const open_console = require('open_console');
 const prompts = require('prompts');
 const x_console = new open_console();
-let download = function(url:string,filename:string,dir:string,onProgress:any) {
-    return new Promise((resolve,reject) => {
-        const dl = require('download-file-with-progressbar');
-        let dw = dl(url, {
-            filename, dir,
-            onDone: (info)=> {
-                resolve(info)
-            },
-            onProgress: (curr,total) => {
-                onProgress(curr,total);
-            },
-            onError: (err) => {
-                reject(err);
-            }
-        });
-    });
-};
-let dmgMount = function(file) {
-    return new Promise((resolve,reject) => {
-        const dmg = require('dmg');
-        dmg.mount(file, (err,path)=>{
-            if (err) {
-                reject(err);
-            } else {
-               resolve(path);
-            }
-        });
-    });
-};
-let dmgUnMount = function(file) {
-    return new Promise((resolve,reject) => {
-        const dmg = require('dmg');
-        dmg.unmount(file, (err)=>{
-            if (err) {
-                reject(err);
-            } else {
-               resolve('');
-            }
-        });
-    });
-};
 //
 
 @cli
@@ -64,6 +23,7 @@ export default class concepto_cli {
     @command('Creates a new Concepto DSL application',[
         ['-t','--type', 'Specifies the application type (vue,eb,nest)'],
         ['-n','--name', 'Specifies the application name'],
+        ['-h','--hosting', 'Specifies hosting type (local,aws,gh-pages)'],
         ['--aws-access','Specifies AWS access key'],
         ['--aws-secret','Specifies AWS secret key'],
         ['--secrets-pass','Set the default .secrets-pass password'],
@@ -75,7 +35,7 @@ export default class concepto_cli {
         if (!arg.name) arg.name = (await prompts({
             type: 'text',
             name: 'value',
-            message: `What's the applicacion name`,
+            message: `What's the application's name`,
             validate: value => {
                 if (value.length<5) return `Name to short!`;
                 if (value.trim().indexOf(' ')!=-1) return `Name cannot contain spaces!`;
@@ -147,22 +107,22 @@ export default class concepto_cli {
             //install
             const spinner = x_console.spinner({ color:'cyan' });
             spinner.start('installing ..');
-            const mount_path = await dmgMount(dmg.path);
+            const mount_path = await mount(dmg.path);
             const abs_source = path.join(mount_path, 'Concepto DSL.app');
             const abs_target = path.join(appsFolder, 'Concepto DSL.app');
             //todo: extract and show Concepto version from mount_path (/Volumes/Concepto DSL v1.2.6/)
             const fs = require('fs-extra');
             const execCopy = await fs.copy(abs_source,abs_target,{ overwrite:true });
             //cleanup
-            await dmgUnMount(mount_path);
+            await unmount(mount_path);
             //end
             spinner.text('installed succesfully');
             spinner.succeed();
-            console.log('');
             //
         } else {
             x_console.out({ color:'red', message:'Only macOS is currently supported; stay tune for the Windows version!' });
         }
+        console.log('');
     }
 }
 
