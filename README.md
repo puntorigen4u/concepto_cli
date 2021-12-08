@@ -3,9 +3,9 @@
 </p>
 <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for visually building efficient and scalable nodejs based applications.</p>
 <p align="center">
-    <a href="https://www.npmjs.com/~puntorigen"><img src="https://img.shields.io/npm/v/@nestjs/cli.svg" alt="NPM Version" /></a>
-    <a href="https://www.npmjs.com/~puntorigen"><img src="https://img.shields.io/npm/l/@nestjs/cli.svg" alt="Package License" /></a>
-    <a href="https://www.npmjs.com/~puntorigen"><img src="https://img.shields.io/npm/dm/@nestjs/cli.svg" alt="NPM Downloads" /></a>
+    <a href="https://www.npmjs.com/~puntorigen"><img src="https://img.shields.io/npm/v/@concepto/cli.svg" alt="NPM Version" /></a>
+    <a href="https://www.npmjs.com/~puntorigen"><img src="https://img.shields.io/npm/l/@concepto/cli.svg" alt="Package License" /></a>
+    <a href="https://www.npmjs.com/~puntorigen"><img src="https://img.shields.io/npm/dm/@concepto/cli.svg" alt="NPM Downloads" /></a>
     <a href="https://www.npmjs.com/~puntorigen" target="_blank"><img src="https://img.shields.io/tokei/lines/github/puntorigen4u/concepto_cli"></a>
     <a href="https://twitter.com/punt0rigen" target="_blank"><img src="https://img.shields.io/twitter/follow/punt0rigen.svg?style=social&label=Follow"></a>
 </p>
