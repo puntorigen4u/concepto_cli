@@ -50,7 +50,7 @@ let getSerial = function() {
             console.log('');
             x_console.out({ message:'Options:', color:'brightCyan' });
             x_console.out({ message:'-v, --version\t\t\tOutputs the current version', color:'cyan' });
-            x_console.out({ message:'-h, --help vue.dsl\t\tOutputs usage information', color:'cyan' });
+            x_console.out({ message:'-h, --help\t\t\tOutputs usage information', color:'cyan' });
         }
         console.log('');
         if (x_helper.commands) {
