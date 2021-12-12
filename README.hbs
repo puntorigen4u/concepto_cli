@@ -22,7 +22,9 @@ $ npm install -g @concepto/cli
 
 ## Usage
 
-... work in progress ...
+```
+$ concepto --help
+```
 
 ## Stay in touch
 
