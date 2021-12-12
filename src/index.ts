@@ -7,7 +7,7 @@ import { cli,command } from './decorators'
 import { mount, unmount } from './dmg'
 import { download } from './download'
 
-const open_console = require('open_console');
+const open_console = require('@concepto/console');
 const prompts = require('prompts');
 const x_console = new open_console();
 //
@@ -48,8 +48,8 @@ export default class concepto_cli {
             name: 'value',
             message: `Choose an application type`,
             choices: [
-                { title: 'Frontend ->  NuxtJS + VUE', value:'vue', description: `VueJS web app builder; can publish to S3 if set to static` },
-                //{ title: 'Frontend - NestJS + React', disabled:true, value:'react', description: `ReactJS web app builder; can publish to S3 if set to static` },
+                { title: 'Frontend ->  NuxtJS + VUE', value:'vue', description: `VueJS web app builder` },
+                { title: 'Frontend ->  NestJS + React', disabled:true, value:'react', description: `ReactJS web app builder` },
                 { title: 'Backend  ->  ExpressJS + Sequelize', value:'eb', description: `NodeJS backend with sequelize for DB handling` },
                 { title: 'Backend  ->  NestJS + Typescript', disabled:true, value:'nest', description: `Experimental NestJS backend with typescript support` }
             ],

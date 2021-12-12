@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 process.env.UV_THREADPOOL_SIZE=8*require('os').cpus().length;
 //const cli = require('command-line-args');
-const open_console = require('open_console');
+const open_console = require('@concepto/console');
 const pkg = require('../package.json');
 const helper = require('../lib/index');
 const cmds = require('minimist')(process.argv.slice(2));

@@ -1,7 +1,15 @@
 {
   "name": "@concepto/cli",
-  "version": "0.0.332",
+  "version": "0.0.335",
   "description": "Concepto DSL - visually create and maintain modern node.js based apps (@cli)",
+  "keywords": [
+    "creador",
+    "puntorigen",
+    "concepto",
+    "conceptodsl",
+    "dsl",
+    "cli"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -19,7 +27,6 @@
     "type": "git",
     "url": "git+https://github.com/puntorigen4u/concepto_cli.git"
   },
-  "keywords": [],
   "author": "Pablo Schaffner",
   "license": "MIT",
   "bugs": {
@@ -29,13 +36,12 @@
   "homepage": "https://github.com/puntorigen4u/concepto_cli#readme",
   "dependencies": {
     "cli-progress": "^3.9.1",
-    "concepto": "github:puntorigen4u/concepto",
     "dmg": "^0.1.0",
     "download-file-with-progressbar": "^1.2.3",
-    "dsl_parser": "github:puntorigen4u/dsl_parser",
+    "@concepto/dsl_parser": "*",
+    "@concepto/console": "*",
     "fs-extra": "^10.0.0",
     "minimist": "^1.2.5",
-    "open_console": "github:puntorigen4u/console",
     "prompts": "^2.4.2"
   },
   "devDependencies": {
