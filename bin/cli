@@ -66,7 +66,7 @@ let getSerial = function() {
             console.log('');
         }
         //copyright
-        x_console.out({ message:`Copyright © 2021, Pablo Schaffner. All rights reserved.`, color:'dim' });
+        x_console.out({ message:`Copyright © 2021-2022, Pablo Schaffner. All rights reserved.`, color:'dim' });
     };
     x_console.title({ title:`Concepto CLI v${pkg.version}`, titleColor:'brightYellow', color:'green' });
     if (cmds._.includes('help') || cmds.h || cmds.help || cmds._.length==0) {
